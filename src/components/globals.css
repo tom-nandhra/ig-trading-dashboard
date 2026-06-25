@@ -1,0 +1,153 @@
+/* src/app/globals.css */
+/* Replace the entire file with this. Dark, dense, instrument-panel styling —
+   monospaced numerals so figures align like a trading terminal rather than a
+   marketing page. */
+
+@import "tailwindcss";
+
+:root {
+  --bg: #060910;
+  --panel: #0c111b;
+  --panel-edge: #1a2232;
+  --text: #e5e7eb;
+  --text-dim: #6b7280;
+  --accent: #4ade80;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.dash {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.dash-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--panel-edge);
+  padding-bottom: 1.25rem;
+}
+
+.dash-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  margin-bottom: 0.5rem;
+}
+
+.dash-title {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--panel-edge);
+  border: 1px solid var(--panel-edge);
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--panel);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.widget {
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.widget-wide {
+  grid-column: 1 / -1;
+}
+
+.widget-title {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--panel-edge);
+}
+
+.data-table td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid #11161f;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table tbody tr:hover {
+  background: #11161f;
+}
+
+@media (max-width: 860px) {
+  .stat-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .widget-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

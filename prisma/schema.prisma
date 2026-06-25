@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Trade {
+  id           Int       @id @default(autoincrement())
+  openId       String    @unique     // ← new key
+  closeId      String?               // ← was @unique + required
+  instrument   String
+  direction    String?
+  size         Float?
+  openLevel    Float?
+  closeLevel   Float?
+  openDate     DateTime?
+  closeDate    DateTime?             // ← open positions have none
+  currency     String?
+  profitLoss   Float?                // ← open positions have none
+  fees         Float     @default(0) // ← script doesn't set it
+  durationSecs Int?
+  createdAt    DateTime  @default(now())
+}
+
+model CashTransaction {
+  id          Int      @id @default(autoincrement())
+  type        String   // "DEPOSIT" | "WITHDRAWAL" | "FINANCING"
+  amount      Float    // signed, taken straight from profitAndLoss
+  date        DateTime
+  reference   String   @unique  // every cash row carries one; this is the dedup key
+  description String?  // the raw instrumentName, e.g. "...FX Interest for 1 day Spot Gold"
+  createdAt   DateTime @default(now())
+}
