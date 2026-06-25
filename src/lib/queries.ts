@@ -104,6 +104,7 @@ async function pnlByInstrument(): Promise<{ instrument: string; pnl: number }[]>
 // Most recent closed trades for the table.
 async function recentTrades() {
   const trades = await prisma.trade.findMany({
+    where: { closeDate: { not: null } },  // only closed trades
     orderBy: { closeDate: "desc" },
     take: 20,
     select: {
@@ -114,10 +115,10 @@ async function recentTrades() {
     },
   });
   return trades.map((t) => ({
-    date: t.closeDate.toISOString().slice(0, 10),
+    date: t.closeDate!.toISOString().slice(0, 10),
     instrument: t.instrument,
-    direction: t.direction,
-    pnl: Math.round(t.profitLoss * 100) / 100,
+    direction: t.direction ?? "",
+    pnl: Math.round((t.profitLoss ?? 0) * 100) / 100,
   }));
 }
 
