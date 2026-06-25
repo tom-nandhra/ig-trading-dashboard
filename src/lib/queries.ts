@@ -61,7 +61,7 @@ async function pnlByDay(): Promise<{ date: string; cumulative: number }[]> {
   return trades.filter((t) => t.closeDate != null).map((t) => {
     running += t.profitLoss ?? 0;
     return {
-      date: t.closeDate.toISOString().slice(0, 10),
+      date: t.closeDate!.toISOString().slice(0, 10),
       cumulative: Math.round(running * 100) / 100,
     };
   });
